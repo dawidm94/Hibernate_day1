@@ -7,43 +7,42 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/authors")
-public class AuthorController {
+@RequestMapping("/publishers")
+public class PublisherController {
 
 	@Autowired
-	private AuthorDao authorDao;
+	private PublisherDao publisherDao;
 
 	@RequestMapping("/read/{id}")
 	@ResponseBody
 	public String read(@PathVariable("id") Long id) {
-		Author author = authorDao.findById(id);
-		return author.toString();
+		Publisher publisher = publisherDao.findById(id);
+		return publisher.toString();
 	}
 
 	@RequestMapping("/save")
 	@ResponseBody
 	public String save() {
-		Author author = new Author();
-		author.setFirstName("firstName");
-		author.setLastName("lastName");
-		authorDao.save(author);
-		return "Added author id: " + author.getId();
+		Publisher publisher = new Publisher();
+		publisher.setName("name");
+		publisherDao.save(publisher);
+		return "Added publisher id: " + publisher.getId();
 	}
 
 	@RequestMapping("/delete/{id}")
 	@ResponseBody
 	public void delete(@PathVariable("id") long id) {
-		Author author = authorDao.findById(id);
-		authorDao.delete(author);
+		Publisher publisher = publisherDao.findById(id);
+		publisherDao.delete(publisher);
 	}
 
 	@RequestMapping("/update/{id}")
 	@ResponseBody
 	public String update(@PathVariable("id") Long id) {
-		Author author = authorDao.findById(id);
-		author.setLastName("new lastName");
-		authorDao.update(author);
-		return "Author updated";
+		Publisher publisher = publisherDao.findById(id);
+		publisher.setName("new name");
+		publisherDao.update(publisher);
+		return "Publisher updated";
 	}
 
 }
