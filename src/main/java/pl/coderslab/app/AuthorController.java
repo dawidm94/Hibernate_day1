@@ -9,46 +9,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/books")
-public class BookController {
-	
+@RequestMapping("/authors")
+public class AuthorController {
+
 	@Autowired
-	private BookDao bookDao;
-	
+	private AuthorDao authorDao;
+
 	@RequestMapping("/read/{id}")
 	@ResponseBody
 	public String read(@PathVariable("id") Long id) {
-		Book book = bookDao.findById(id);
-		return book.toString();
+		Author author = authorDao.findById(id);
+		return author.toString();
 	}
-	
+
 	@RequestMapping("/save")
 	@ResponseBody
 	public String save() {
-		Book book = new Book();
-		book.setAuthor("author");
-		book.setDescription("description");
-		book.setPublisher("publisher");
-		book.setRating(new BigDecimal(8.5));
-		book.setTitle("title");
-		bookDao.saveBook(book);
-		return "Added book id: " + book.getId();
+		Author author = new Author();
+		author.setFirstName("firstName");
+		author.setLastName("lastName");
+		authorDao.save(author);
+		return "Added author id: " + author.getId();
 	}
-	
+
 	@RequestMapping("/delete/{id}")
 	@ResponseBody
 	public void delete(@PathVariable("id") long id) {
-		Book book = bookDao.findById(id);
-		bookDao.delete(book);
+		Author author = authorDao.findById(id);
+		authorDao.delete(author);
 	}
-	
+
 	@RequestMapping("/update/{id}")
 	@ResponseBody
 	public String update(@PathVariable("id") Long id) {
-		Book book = bookDao.findById(id);
-		book.setTitle("new title");
-		bookDao.update(book);
-		return "Book updated";
+		Author author = authorDao.findById(id);
+		author.setLastName("new lastName");
+		authorDao.update(author);
+		return "Author updated";
 	}
 
 }
