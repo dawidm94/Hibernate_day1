@@ -28,7 +28,7 @@ public class BookController {
 		Book book = new Book();
 		book.setAuthor("author");
 		book.setDescription("description");
-		book.setPublisher("publisher");
+		book.setPublisher(new Publisher());
 		book.setRating(new BigDecimal(8.5));
 		book.setTitle("title");
 		bookDao.saveBook(book);

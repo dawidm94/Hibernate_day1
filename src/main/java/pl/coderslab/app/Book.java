@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -29,12 +30,13 @@ public class Book {
 	@Column(scale=2, precision=4)
 	private BigDecimal rating;
 
-	@Column(length = 255)
-	private String publisher;
+	@Column(name = "publisher", nullable = false, unique = false)
+	@ManyToOne
+	private Publisher publisher;
 
 	@Column(columnDefinition = "TEXT")
 	private String description;
-
+	
 	public Book() {
 		
 	}
@@ -67,11 +69,11 @@ public class Book {
 		this.rating = rating;
 	}
 
-	public String getPublisher() {
+	public Publisher getPublisher() {
 		return publisher;
 	}
 
-	public void setPublisher(String publisher) {
+	public void setPublisher(Publisher publisher) {
 		this.publisher = publisher;
 	}
 
